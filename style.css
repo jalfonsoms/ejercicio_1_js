@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+    background-color: #232323;
+}
+
+main{
+    display: flex;
+    margin: 5vw 30vw 1vw 30vw;
+    height: 30vw;
+    border-radius: 3vw;
+    background-color: aqua;
+    flex-direction: column;
+    align-items: center;
+}
+
+.home{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.home-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 3vw 0 2vw;
+    height: 3vw;
+    width: 6vw;
+    background-color: rgb(63, 98, 255);
+    color: white;
+    border: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.logoPokemon{
+    display: flex;
+    margin: -2vw 0 0 0;
+}
+
+.imagen{
+    width: 20vw;
+}
+
+.search-container{
+    top: 1vw;
+    position: relative;
+}
+
+input{
+    top: 0;
+    width: 20vw;
+    padding: 1vw;
+    border-radius: 2vw;
+    border: 0;
+    outline: none;
+}
+
+.search-button{
+    position: absolute;
+    background-color: rgb(63, 98, 255);
+    border-radius: 0 2vw 2vw 0;
+    width: 45px;
+    height: 100%;
+    border: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    color: white;
+}
+
+.home-button:hover{
+    background-color: rgb(255, 79, 79);
+    color: rgb(63, 98, 255);
+}
+
+.search-button:hover{
+    background-color: rgb(255, 79, 79);
+    color: rgb(63, 98, 255);
+}
