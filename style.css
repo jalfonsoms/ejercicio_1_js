@@ -16,13 +16,13 @@ main{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin: 2vw 5vw 2vw 5vw;
+    margin: 2vw 30vw 2vw 30vw;
     border-radius: 3vw;
     background-color: aqua;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    padding: 0 0 25vw 0;
+    padding: 0 0 7vw 0;
 }
 
 .home{
@@ -51,18 +51,18 @@ main{
 
 .logoPokemon{
     display: flex;
-    margin: -2vw 0 0 0;
+    margin: -2.5vw 0 0 0;
 }
 
 .imagen{
-    width: 20vw;
+    width: 35vw;
 }
 
 .buscador{
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    top: 1vw;
+    top: 0vw;
 }
 
 #suggestionsList {
@@ -120,7 +120,7 @@ main{
 }
 
 #nombrePokemon{
-    padding: 3vw 0 0 0;
+    padding: 2vw 0 0 0;
     font-size: 1.5vw;
 }
 
