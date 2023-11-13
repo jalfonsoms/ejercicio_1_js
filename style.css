@@ -60,6 +60,7 @@ main{
 
 .buscador{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     position: relative;
     top: 0vw;
@@ -91,6 +92,8 @@ main{
 }
 
 #searchInput{
+    display: flex;
+    justify-content: center;
     top: 0;
     width: 20vw;
     padding: 1vw;
