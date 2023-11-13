@@ -39,7 +39,7 @@ async function perfilPokemon(nombre) {
             imagenPokemon.setAttribute('src', pokemonData.sprites.other["official-artwork"].front_default);
         })
         .catch((error) => {
-            nombrePokemon.innerHTML = ` EL Pokemon <strong>${nombre}</strong> no es valido. Por favor, verifica el nombre del Pokemon.`;
+            nombrePokemon.innerHTML = ` EL Pokemon <strong>${nombre}</strong> no existe. Verificar el nombre ingresado.`;
             nombrePokemon.innerHTML = nombrePokemon.innerHTML.toUpperCase();
             imagenPokemon.setAttribute('src',''); //Quitar la imagen
         });
