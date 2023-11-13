@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://kit.fontawesome.com/3e8b249af4.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
     
     <title>Pokemon</title>
 </head>
@@ -17,9 +18,14 @@
         <div class="logoPokemon">
             <img class="imagen" src="src/logoPokemon.png" alt="POKEMON">
         </div>
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Buscar...">
+        <div class="buscador">
+            <input type="text" id="searchInput" placeholder="Buscar...">
             <button class="search-button"><i class="fa-solid fa-magnifying-glass fa-bounce"></i></button>
+            <ul id="suggestionsList"></ul>
+        </div>
+        <div id="nombrePokemon"></div>
+        <div >
+            <img id="imagenPokemon" src="" alt="">
         </div>
     </main>
 </body>
