@@ -38,7 +38,7 @@ main{
     align-items: center;
     border-radius: 0 3vw 0 2vw;
     height: 3vw;
-    width: 6vw;
+    width: 4vw;
     background-color: rgb(63, 98, 255);
     color: white;
     border: 0;
@@ -67,6 +67,7 @@ main{
 
 #suggestionsList {
     list-style: none;
+    border-radius: 0.5vw;
     padding: 0;
     margin: 0;
     position: absolute;
@@ -87,7 +88,6 @@ main{
 
 #suggestionsList li:hover {
     background-color: rgb(63, 98, 255);
-    color: rgb(255, 79, 79);
 }
 
 #searchInput{
@@ -120,6 +120,7 @@ main{
 }
 
 #nombrePokemon{
+    text-align: center;
     padding: 2vw 0 0 0;
     font-size: 1.5vw;
 }

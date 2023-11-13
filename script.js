@@ -34,12 +34,14 @@ async function perfilPokemon(nombre) {
 
             const pokemonData = response.data;
 
-            nombrePokemon.textContent = `Nombre: ${pokemonData.name}`;
+            nombrePokemon.textContent = `${pokemonData.name}`;
+            nombrePokemon.textContent = nombrePokemon.textContent.toUpperCase();
             imagenPokemon.setAttribute('src', pokemonData.sprites.other["official-artwork"].front_default);
         })
         .catch((error) => {
-            const nombrePokemon = document.getElementById('nombrePokemon');
             nombrePokemon.textContent = `No hay coincidencia con ${nombre}. Por favor, verifica el nombre del Pokemon.`;
+            nombrePokemon.textContent = nombrePokemon.textContent.toUpperCase();
+            imagenPokemon.setAttribute('src',''); //Quitar la imagen
         });
 }
 
