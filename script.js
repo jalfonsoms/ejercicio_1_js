@@ -39,7 +39,7 @@ async function perfilPokemon(nombre) {
         })
         .catch((error) => {
             const nombrePokemon = document.getElementById('nombrePokemon');
-            nombrePokemon.textContent = `No se encontró ${nombre}. Por favor, verifica el nombre.`;
+            nombrePokemon.textContent = `No hay coincidencia con ${nombre}. Por favor, verifica el nombre del Pokemon.`;
         });
 }
 
