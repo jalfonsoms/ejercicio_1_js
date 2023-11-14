@@ -131,3 +131,11 @@ main{
     display: flex;
     width: 20vw;
 }
+
+.informacionPokemon{
+    text-align: justify;
+    padding: 0 2vw 0 2vw;
+    font-size: 1vw;
+}
+
+
