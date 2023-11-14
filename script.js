@@ -26,17 +26,43 @@ async function obtenerNombresPaginados(offset, limit) {
     return await procesarNombres(respuestaPeticion);
 }
 
+async function descripcionPokemon(url) {
+    axios.get(url)
+        .then((response) => {
+            const descripcion = document.getElementById('descripcion');
+
+            pokemonSpecies = response.data;
+
+            // Filtrar las entradas de texto en español
+            const entradaEnEspanol = pokemonSpecies.flavor_text_entries.find(entry => entry.language.name === 'es');
+            
+            // Mostrar la descripción en español
+            if (entradaEnEspanol) {
+                descripcion.textContent = entradaEnEspanol.flavor_text;
+                descripcion.innerHTML = `<strong>DESCRIPCION</strong>: ${descripcion.textContent.toUpperCase()}`
+            } else {
+                descripcion.textContent = 'No hay descripción en español disponible.';
+            }
+        })
+        .catch((error) => {
+            descripcion.textContent = 'Se produjo un error al cargar la descripción.'
+        });
+}
+
+
 async function perfilPokemon(nombre) {
     axios.get(`https://pokeapi.co/api/v2/pokemon/${nombre.toLowerCase()}`)
         .then((response) => {
             const nombrePokemon = document.getElementById('nombrePokemon');
-            const imagenPokemon = document.getElementById('imagenPokemon')
+            const imagenPokemon = document.getElementById('imagenPokemon');
 
             const pokemonData = response.data;
 
             nombrePokemon.textContent = `${pokemonData.name}`;
             nombrePokemon.textContent = nombrePokemon.textContent.toUpperCase();
             imagenPokemon.setAttribute('src', pokemonData.sprites.other["official-artwork"].front_default);
+            pokemonSpecies = `${pokemonData.species.url}`;
+            descripcionPokemon(pokemonSpecies);
         })
         .catch((error) => {
             nombrePokemon.innerHTML = ` EL Pokemon <strong>${nombre}</strong> no existe. Verificar el nombre ingresado.`;
