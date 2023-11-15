@@ -5,21 +5,21 @@ const consumeApiWithAxios = async (url) => {
         return response.data.results; // Devolver response.data.results en lugar de response.results
     } catch (error) {
         console.error(`Falló la petición a la API con error: ${error.message}`);
-        return []; // Devolver un array vacío en caso de error para evitar problemas más adelante
+        return [];
     }
 }
 
 async function procesarNombres(resp) {
     try {
         const respApi = await resp;
-        const nombres = respApi.map(item => item.name); // Mapea los nombres desde el array de objetos
+        const nombres = respApi.map(results => results.name); // Mapea los nombres desde el array de objetos
         return nombres; // Devuelve los nombres
     } catch (error) {
         console.error(`Error al procesar la respuesta: ${error.message}`);
         return [];
     }
 }
-
+//Obtener la mayor base de datos de Pokemones
 async function obtenerNombresPaginados(offset, limit) {
     const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`;
     const respuestaPeticion = await consumeApiWithAxios(url);
@@ -31,22 +31,60 @@ async function descripcionPokemon(url) {
         const response = await axios.get(url);
         const descripcion = document.getElementById('descripcion');
 
-        const pokemonSpecies = response.data;
+        const species = response.data;
 
         // Filtrar las entradas de texto en español
-        const entradaEnEspanol = pokemonSpecies.flavor_text_entries.find(entry => entry.language.name === 'es');
+        const entradaEnEspanol = species.flavor_text_entries.find(entry => entry.language.name === 'es');
+        descripcion.textContent = entradaEnEspanol.flavor_text;
+        descripcion.innerHTML = `<strong>DESCRIPCION</strong>: ${descripcion.textContent.toUpperCase()}`
 
-        // Mostrar la descripción en español
-        if (entradaEnEspanol) {
-            descripcion.textContent = entradaEnEspanol.flavor_text;
-            descripcion.innerHTML = `<strong>DESCRIPCION</strong>: ${descripcion.textContent.toUpperCase()}`
-        } else {
-            descripcion.textContent = 'No hay descripción en español disponible.';
-        }
+        evolucionURL = species.evolution_chain.url;
+        evolucionPokemon(evolucionURL);
+
     } catch (error) {
         descripcion.textContent = 'Se produjo un error al cargar la descripción.';
     }
+    return evolucionURL;
 }
+
+async function evolucionPokemon(url) {
+    try {
+        const response = await axios.get(url);
+        const evolucionChain = response.data;
+        const evolucion = document.getElementById('evolucion');
+
+        chain = evolucionChain.chain;
+
+        evoluciona = obtenerEvolucion(chain);
+
+        //const cadenaEvolucion = obtenerCadenaEvolucion(evolucionChain.chain);
+        evolucion.innerHTML = `<strong>EVOLUCION</strong>: ${evoluciona}`;
+    } catch {
+        evolucion.innerHTML = '<strong>EVOLUCION</strong>: NO PUEDE EVOLUCIONAR.';
+    }
+    return chain
+}
+
+function obtenerEvolucion(chain) {
+    evolucionar = document.querySelector('#evolucionar');
+
+    let evolucion = chain.species.name;
+    pokemonConsultado = searchInput.value;
+
+    if (chain.evolves_to.length > 0) {  //Si hay evolucion, busca cual
+        if (evolucion === pokemonConsultado) {
+            evolucion = chain.evolves_to[0].species.name.toUpperCase();   //RECURSIVIDAD: evolves_to.evolves_to.evolves_to... .species.name
+            return evolucion;
+        }else {
+            return obtenerEvolucion(chain.evolves_to[0]); //Retorna el nuevo valor de chain
+        }
+    } else {
+        evolucion = 'NO PUEDE EVOLUCIONAR.';
+    }
+    return 
+    ;
+} 
+
 
 async function perfilPokemon(nombre) {
     try {
@@ -61,17 +99,18 @@ async function perfilPokemon(nombre) {
         imagenPokemon.setAttribute('src', pokemonData.sprites.other["official-artwork"].front_default);
         
         //Obtener Habilidades
-        const habilidad = pokemonData.abilities.map(item => item.ability.name).join(', ');
+        const habilidad = pokemonData.abilities.map(abilities => abilities.ability.name).join(', ');
         habilidades.innerHTML = `<strong>HABILIDADES</strong>: ${habilidad.toUpperCase()}.`;
 
-        const pokemonSpeciesUrl = pokemonData.species.url;
-        descripcionPokemon(pokemonSpeciesUrl);
+        const speciesURL = pokemonData.species.url;
+        descripcionPokemon(speciesURL);
     } catch (error) {
         nombrePokemon.innerHTML = ` EL Pokemon <strong>${nombre}</strong> no existe. Verificar el nombre ingresado.`;
         nombrePokemon.innerHTML = nombrePokemon.innerHTML.toUpperCase();
         imagenPokemon.setAttribute('src','');
         habilidades.innerHTML = ''; // Limpia el contenido
     }
+    return speciesURL;
 }
 
 
@@ -91,6 +130,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         displaySuggestions(filteredResults);
     });
 
+    //Buscar al presionar ENTER
+    searchInput.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            const inputValue = searchInput.value.toLowerCase();
+            perfilPokemon(inputValue);
+            suggestionsList.innerHTML = "";
+        }
+    });
+
+    //Buscar al dar clic en botton (Lupa)
     searchButton.addEventListener("click", function () {
         const inputValue = searchInput.value.toLowerCase();
         perfilPokemon(inputValue);
