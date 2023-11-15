@@ -36,7 +36,7 @@ async function descripcionPokemon(url) {
         // Filtrar las entradas de texto en español
         const entradaEnEspanol = species.flavor_text_entries.find(entry => entry.language.name === 'es');
         descripcion.textContent = entradaEnEspanol.flavor_text;
-        descripcion.innerHTML = `<strong>DESCRIPCION</strong>: ${descripcion.textContent.toUpperCase()}`
+        descripcion.innerHTML = `<strong>DESCRIPCION:</strong> ${descripcion.textContent.toUpperCase()}`
 
         evolucionURL = species.evolution_chain.url;
         evolucionPokemon(evolucionURL);
@@ -59,7 +59,7 @@ async function evolucionPokemon(url) {
         //const cadenaEvolucion = obtenerCadenaEvolucion(evolucionChain.chain);
         evolucion.innerHTML = `<strong>EVOLUCION:</strong> ${evoluciona}.`;
     } catch {
-        evolucion.innerHTML = '<strong>EVOLUCION</strong>: NO PUEDE EVOLUCIONAR.';
+        evolucion.innerHTML = '<strong>EVOLUCION:</strong> NO PUEDE EVOLUCIONAR.';
     }
 }
 
@@ -97,7 +97,7 @@ async function perfilPokemon(nombre) {
         
         //Obtener Habilidades
         const habilidad = pokemonData.abilities.map(abilities => abilities.ability.name).join(', ');
-        habilidades.innerHTML = `<strong>HABILIDADES</strong>: ${habilidad.toUpperCase()}.`;
+        habilidades.innerHTML = `<strong>HABILIDADES:</strong> ${habilidad.toUpperCase()}.`;
 
         const speciesURL = pokemonData.species.url;
         descripcionPokemon(speciesURL);
