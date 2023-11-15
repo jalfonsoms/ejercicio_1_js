@@ -44,7 +44,6 @@ async function descripcionPokemon(url) {
     } catch (error) {
         descripcion.textContent = 'Se produjo un error al cargar la descripción.';
     }
-    return evolucionURL;
 }
 
 async function evolucionPokemon(url) {
@@ -58,11 +57,10 @@ async function evolucionPokemon(url) {
         evoluciona = obtenerEvolucion(chain);
 
         //const cadenaEvolucion = obtenerCadenaEvolucion(evolucionChain.chain);
-        evolucion.innerHTML = `<strong>EVOLUCION</strong>: ${evoluciona}`;
+        evolucion.innerHTML = `<strong>EVOLUCION:</strong> ${evoluciona}.`;
     } catch {
         evolucion.innerHTML = '<strong>EVOLUCION</strong>: NO PUEDE EVOLUCIONAR.';
     }
-    return chain
 }
 
 function obtenerEvolucion(chain) {
@@ -81,10 +79,9 @@ function obtenerEvolucion(chain) {
     } else {
         evolucion = 'NO PUEDE EVOLUCIONAR.';
     }
-    return 
+    return evolucion;
     ;
 } 
-
 
 async function perfilPokemon(nombre) {
     try {
@@ -105,12 +102,11 @@ async function perfilPokemon(nombre) {
         const speciesURL = pokemonData.species.url;
         descripcionPokemon(speciesURL);
     } catch (error) {
-        nombrePokemon.innerHTML = ` EL Pokemon <strong>${nombre}</strong> no existe. Verificar el nombre ingresado.`;
+        nombrePokemon.innerHTML = `EL Pokemon <strong>${nombre}</strong> no existe. Verificar el nombre ingresado.`;
         nombrePokemon.innerHTML = nombrePokemon.innerHTML.toUpperCase();
         imagenPokemon.setAttribute('src','');
         habilidades.innerHTML = ''; // Limpia el contenido
     }
-    return speciesURL;
 }
 
 
